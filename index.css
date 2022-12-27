@@ -88,6 +88,9 @@ header {
 .card + .card {
   margin-top: 1.5em;
 }
+.card img {
+  width: 100px;
+}
 .card-text {
   align-self: center;
 }
