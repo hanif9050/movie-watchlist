@@ -1,10 +1,133 @@
-html,
-body {
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter";
+  font-style: normal;
+  margin: 0 auto;
+  max-width: 600px;
 }
 header {
-  background-image: url("./header.png");
-  width: 600px;
+  background: rgb(0, 0, 0) url("./header.png");
+  /* width: 600px; */
   height: 200px;
+  position: relative;
+  margin-bottom: 4em;
+}
+.header-title {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 200px;
+  color: #ffffff;
+}
+.header-title h1 {
+  margin: 0;
+  font-weight: 800;
+  font-size: 42.7947px;
+  line-height: 24px;
+}
+.header-title p a {
+  text-decoration: none;
+  color: inherit;
+}
+.header-title p a {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.search-container {
+  position: absolute;
+  display: flex;
+  justify-content: stretch;
+  background-color: red;
+  width: 500px;
+  height: 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.9);
+  left: 50%;
+  bottom: -20;
+  transform: translateX(-50%);
+}
+.search-container input {
+  display: block;
+  background-image: url("search.png");
+  background-size: 20px;
+  background-position: 12px 8px;
+  background-repeat: no-repeat;
+
+  border: none;
+  width: 80%;
+  padding-left: 3em;
+}
+.search-container input:focus {
+  outline: none;
+}
+.search-container button {
+  padding: 0.5em 2.5em;
+  border: none;
+  border-radius: 0 4px 4px 0;
+}
+.container {
+  height: 700px;
+}
+.card {
+  border-bottom: 1.5px solid #e5e7eb;
+  padding-bottom: 1.5em;
+  display: flex;
+  gap: 2em;
+}
+.card + .card {
+  margin-top: 1.5em;
+}
+.card-text {
+  align-self: center;
+}
+.card-text h2 {
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 1.25em;
+  color: #000000;
+  margin-bottom: 0.8em;
+}
+.card-text h2 span {
+  font-size: 0.8rem;
+  margin-left: 0.5em;
+}
+.card-text p span:not(:first-child) {
+  margin-left: 1em;
+}
+.card-text p {
+  margin-bottom: 1em;
+}
+
+.empty {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 20px;
+  color: #dfdddd;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.empty img {
+  width: 30px;
+}
+
+.empty i {
+  background-color: #363636;
+  padding: 0.5em;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  margin-top: 2em;
 }
