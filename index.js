@@ -8,7 +8,7 @@ const inputValue = document.getElementById("input-value");
 
 // function section
 
-const watchList = [];
+let watchList = [];
 
 async function apiCall(movie) {
   try {
@@ -18,26 +18,46 @@ async function apiCall(movie) {
     const data = await res.json();
 
     const movieData = data.Search;
+    let gify = true;
     movieData.forEach(async (movie) => {
       const res = await fetch(
         `https://www.omdbapi.com/?i=${movie.imdbID}&&apikey=31e0948`
       );
+      if (gify) {
+        document.getElementById("container").innerHTML = " ";
+        gify = false;
+      }
       const data = await res.json();
+
       document.getElementById("container").innerHTML += movieRender(data);
       console.log(data);
     });
   } catch (error) {
     console.error(error);
+    document.getElementById("container").innerHTML = `
+      <div class="empty">
+                          
+         <h4>
+            Unable to find what you’re looking<br />
+            for. Please try another search.
+          </h4>
+        </div>
+    `;
   }
 }
 function addToWatchList(e) {
   const cardData = e.closest("div.card");
+  const savedList = JSON.parse(localStorage.getItem("card"));
+  if (savedList) {
+    watchList = [...savedList];
+  }
+
   watchList.push(cardData.dataset.id);
-  console.log(cardData.dataset.id);
+
   localStorage.setItem("card", JSON.stringify(watchList));
   document.getElementById(
     `movie-btn-${cardData.dataset.id}`
-  ).innerHTML = `<button onclick="removeToWatchList(this)">Remove</button>`;
+  ).innerHTML = `<button disabled onclick="removeToWatchList(this)">Added</button>`;
 }
 
 function movieRender(movie) {
@@ -71,6 +91,8 @@ function movieRender(movie) {
 // event section
 btnSearch.addEventListener("click", () => {
   if (inputValue.value) {
+    document.getElementById("container").innerHTML =
+      "<div class='empty'><img src='./Fidget-spinner.gif' class='gify'/></div>";
     const movieList = apiCall(inputValue.value);
     console.log(movieList);
 
