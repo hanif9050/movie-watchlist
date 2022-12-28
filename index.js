@@ -30,10 +30,8 @@ async function apiCall(movie) {
       const data = await res.json();
 
       document.getElementById("container").innerHTML += movieRender(data);
-      console.log(data);
     });
   } catch (error) {
-    console.error(error);
     document.getElementById("container").innerHTML = `
       <div class="empty">
                           
@@ -94,7 +92,6 @@ btnSearch.addEventListener("click", () => {
     document.getElementById("container").innerHTML =
       "<div class='empty'><img src='./Fidget-spinner.gif' class='gify'/></div>";
     const movieList = apiCall(inputValue.value);
-    console.log(movieList);
 
     // inputValue.value = "";
   }

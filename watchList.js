@@ -2,11 +2,16 @@ let watchListData = JSON.parse(localStorage.getItem("card"));
 //
 function removeToWatchList(e) {
   const target = e.closest("div.card");
-  console.log(watchListData, target.dataset.id);
+
   const newList = watchListData.filter((item) => item !== target.dataset.id);
+
   localStorage.setItem("card", JSON.stringify(newList));
   watchListData = JSON.parse(localStorage.getItem("card"));
-  console.log(newList);
+  if (!newList.length) {
+    localStorage.removeItem("card");
+    watchListData = null;
+  }
+
   render(watchListData);
 }
 //
@@ -47,14 +52,23 @@ function render(listData) {
   if (listData) {
     document.getElementById("container").innerHTML = " ";
 
-    console.log(listData);
     listData.forEach(async (id) => {
-      console.log(id);
       const data = await secondApi(id);
-      console.log(data);
+
       document.getElementById("container").innerHTML += movieRender(data);
       // html += movie;
     });
+  } else {
+    document.getElementById("container").innerHTML = `
+     <div class="empty">
+          <h4>Your watchlist is looking a little empty...</h4>
+          <h4>
+            <a href="index.html"><i class="fas fa-plus"></i></a>Let’s add some
+            movies!
+          </h4>
+        </div>
+    `;
   }
 }
+
 render(watchListData);
